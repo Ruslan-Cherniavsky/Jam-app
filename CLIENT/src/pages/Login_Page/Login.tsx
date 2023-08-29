@@ -10,8 +10,10 @@ import { RootState, AppDispatch } from "../../redux_features/store";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Background3d from "../../components/3dBackground";
 
 import { setUserName, setUserId, selecUserName, setUserRole } from "../../redux_features/users/currentUserDataSlice";
+import { Color } from "three";
 
 function Login() {
   const [userMail, setUserMail] = useState("");
@@ -79,17 +81,26 @@ function Login() {
 
   return (
     <>
+
+    {/* <div>
+    <Background3d/>
+
+    </div > */}
+
+
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xl={5} lg={4} md={3} sm={2} xs={1}></Grid>
 
-          <Grid
+          <Grid 
             item
             xl={2}
             lg={4}
             md={6}
             sm={8}
             xs={10}
+
+            
             className="center-align"
           >
             {error ? (
@@ -101,7 +112,7 @@ function Login() {
             <h4 className="center-align">Login</h4>
             <div className="center-align">
               <div className="form">
-                <TextField
+                <TextField 
                   value={userMail}
                   fullWidth
                   id="standard-multiline-static"
@@ -142,8 +153,10 @@ function Login() {
             </div>
           </Grid>
 
+
           <Grid item xl={5} lg={4} md={3} sm={2} xs={1}></Grid>
         </Grid>
+     
       </Box>
     </>
   );

@@ -10,11 +10,14 @@ import { styled } from '@mui/material/styles';
 import capFirtsLett from "../helpers/capFirstLett";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux_features/store";
+import { useState } from "react";
+import { Input } from "@mui/material";
 
 
 
 
 function JamerCard({ jemerDataLocal, jemerCardId }: { jemerDataLocal: any, jemerCardId: any }) {
+ const [currentMode, setCurrentMode] = useState('')
 
   const globalUserId: any = useSelector((state: RootState) => state.currentUserData.userId);
 
@@ -66,10 +69,23 @@ function JamerCard({ jemerDataLocal, jemerCardId }: { jemerDataLocal: any, jemer
   }));
 
 
+const editProfile =() =>{
+  setCurrentMode("Edit Mode")
+
+
+}
+const saveProfile =() =>{
+  setCurrentMode("")
+
+}
+
 
   return (<>
             <Card sx={{ minWidth: 275 }}>
-              <CardContent>
+
+
+
+              {currentMode === "Edit Mode" ? <CardContent>
 
                 <Box sx={{ flexGrow: 1 }}>
                   <Grid container spacing={2}>
@@ -79,42 +95,95 @@ function JamerCard({ jemerDataLocal, jemerCardId }: { jemerDataLocal: any, jemer
                     </Grid>
 
                     <Grid item xs={4}>
-                      <Item > <span className="secTex">Nick Name: </span>{capFirtsLett(jemerDataLocal?.userName)}</Item>
-                      <Item className="itemConected"> <span className="secTex"> Full Name: </span> {capFirtsLett(jemerDataLocal?.firstName)} {' '} {capFirtsLett(jemerDataLocal?.lastName)}</Item>
+                      <Item > <span className="secTex">Nick Name: </span><Input  placeholder={capFirtsLett(jemerDataLocal?.userName)} /></Item>
 
-                      <Item > <span className="secTex">I'm from:</span> {capFirtsLett(jemerDataLocal?.city)} {jemerDataLocal?.country}</Item>
+                      <Item className="itemConected"> <span className="secTex"> Full Name: </span>  <Input  placeholder={capFirtsLett(jemerDataLocal?.firstName)} /> </Item>
+
+
+                      <Item > <span className="secTex">I'm from:</span> <Input  placeholder={capFirtsLett(jemerDataLocal?.city)} /></Item>
                     </Grid>
 
                     <Grid item xs={4}>
-                      <Item><span className="secTex">Age:</span> {jemerDataLocal?.age}</Item>
-                      <Item className="itemConected"><span className="secTex">Gender: </span>{capFirtsLett(jemerDataLocal?.gender)}</Item>
+                      <Item><span className="secTex">Age:</span> <Input  placeholder={jemerDataLocal?.age.toString()} /></Item>
+
+                      <Item className="itemConected"><span className="secTex">Gender: </span><Input  value={capFirtsLett(jemerDataLocal?.gender)} /></Item>
                       <FriendsJams><span className="secTex">--See My:</span> <Button size="small">Jam-Events</Button> <Button size="small">Friends</Button> </FriendsJams>
                     </Grid>
 
                     <Grid item xs={6}>
-                      <Item> <span className="secTex"> Music Geners: </span>{capFirtsLett(jemerDataLocal?.musicalGaners[0])}{" "}
+                      <Item> <span className="secTex"> Music Geners: </span><Input  placeholder={capFirtsLett(jemerDataLocal?.musicalGaners[0])} />{" "}
               
                       </Item>
                     </Grid>
 
                     <Grid item xs={6}>
-                      <Item> <span className="secTex">I'm playing: </span> {capFirtsLett(jemerDataLocal?.musicalInstruments[0])}{" "}
+                      <Item> <span className="secTex">I'm playing: </span> <Input  placeholder={capFirtsLett(jemerDataLocal?.musicalInstruments[0])} />{" "}
          
                       </Item>
                     </Grid>
 
                     <Grid item xs={8}>
-                      <ItemOboutMe> <span className="secTex">Obout Me:</span><br></br><br></br> {capFirtsLett(jemerDataLocal?.oboutMe)}</ItemOboutMe>
+                      <ItemOboutMe> <span className="secTex">Obout Me:</span><br></br><br></br><Input  placeholder={capFirtsLett(jemerDataLocal?.oboutMe)} /></ItemOboutMe>
                     </Grid>
 
                     <Grid item xs={4}>
-                      <ItemInflu><span className="secTex"> References: </span><br></br><br></br> {capFirtsLett(jemerDataLocal?.references)}</ItemInflu>
+                      <ItemInflu><span className="secTex"> References: </span><br></br><br></br> <Input  placeholder={capFirtsLett(jemerDataLocal?.references)} /></ItemInflu>
                     </Grid>
 
                   </Grid>
                 </Box>
+              </CardContent> :
 
-              </CardContent>
+
+
+              <CardContent>
+
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+
+                  <Grid item xs={4}>
+                    <ItemImg>IMG</ItemImg>
+                  </Grid>
+
+                  <Grid item xs={4}>
+                    <Item > <span className="secTex">Nick Name: </span>{capFirtsLett(jemerDataLocal?.userName)}</Item>
+
+                    <Item className="itemConected"> <span className="secTex"> Full Name: </span>  {capFirtsLett(jemerDataLocal?.firstName)} {' '} {capFirtsLett(jemerDataLocal?.lastName)}</Item>
+
+
+                    <Item > <span className="secTex">I'm from:</span> {capFirtsLett(jemerDataLocal?.city)} {jemerDataLocal?.country}</Item>
+                  </Grid>
+
+                  <Grid item xs={4}>
+                    <Item><span className="secTex">Age:</span> {jemerDataLocal?.age}</Item>
+                    <Item className="itemConected"><span className="secTex">Gender: </span>{capFirtsLett(jemerDataLocal?.gender)}</Item>
+                    <FriendsJams><span className="secTex">--See My:</span> <Button size="small">Jam-Events</Button> <Button size="small">Friends</Button> </FriendsJams>
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <Item> <span className="secTex"> Music Geners: </span>{capFirtsLett(jemerDataLocal?.musicalGaners[0])}{" "}
+
+                    </Item>
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <Item> <span className="secTex">I'm playing: </span> {capFirtsLett(jemerDataLocal?.musicalInstruments[0])}{" "}
+
+                    </Item>
+                  </Grid>
+
+                  <Grid item xs={8}>
+                    <ItemOboutMe> <span className="secTex">Obout Me:</span><br></br><br></br> {capFirtsLett(jemerDataLocal?.oboutMe)}</ItemOboutMe>
+                  </Grid>
+
+                  <Grid item xs={4}>
+                    <ItemInflu><span className="secTex"> References: </span><br></br><br></br> {capFirtsLett(jemerDataLocal?.references)}</ItemInflu>
+                  </Grid>
+
+                </Grid>
+              </Box>
+
+              </CardContent>}
 
 
 
@@ -126,7 +195,10 @@ function JamerCard({ jemerDataLocal, jemerCardId }: { jemerDataLocal: any, jemer
                 <Button size="small">unfriend</Button>
               </CardActions> :  
               <CardActions>
-                <Button size="small">Edit Profile</Button>
+                <Button size="small" onClick={editProfile}>Edit Profile</Button>
+
+                {currentMode === "Edit Mode" ? <Button size="small" onClick={saveProfile}>Seve Changes</Button>: null}
+
   
               </CardActions>}
 
