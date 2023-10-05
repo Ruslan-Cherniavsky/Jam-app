@@ -117,6 +117,21 @@ const getJemerCardDataById = async (req, res) => {
   }
 };
 
+
+
+const updateUser = async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    if (userId) {
+      const user = await User.findById(userId)
+      if (!user) { return res.status(404).json({ message: 'USER not found!' }) }
+  }
+      await User.updateOne({ _id: userId }, req.body)
+      return res.status(200).json({ message: 'User Updated' })
+  } catch (error) { return res.status(500).json({ error }) }
+}
+
+
 const deleteUserById = async (req, res) => {
   const userId = req.params.userid;
   try {
@@ -137,4 +152,5 @@ module.exports = {
   getAllUsers,
   deleteUserById,
   getJemerCardDataById,
+  updateUser,
 };

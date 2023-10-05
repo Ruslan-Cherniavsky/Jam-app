@@ -9,6 +9,7 @@ const {
   getAllUsers,
   deleteUserById,
   getJemerCardDataById,
+  updateUser
 } = require("../controllers/users");
 
 router.post("/signup", signup);
@@ -19,5 +20,8 @@ router.get("/getallusers", verifyToken, getAllUsers);
 router.get("/getjemercarddatabyid/:userid", verifyToken, getJemerCardDataById);
 
 router.delete("/deleteuserbyid/:userid", verifyAdminToken, deleteUserById);
+
+router.patch('/patchuserbyid/:userId', verifyToken, updateUser)
+
 
 module.exports = router;

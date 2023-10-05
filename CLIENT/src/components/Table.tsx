@@ -314,7 +314,7 @@ export default function MainTable({ rows }: { rows: Array<any> }) {
         <Box sx={{
           width: "100%"
         }}>
-          <Paper sx={{ width: "100%", mb: 2, backgroundColor: "aqua", opacity: "50%", textDecorationColor: "white" }}>
+          <Paper sx={{ width: "100%", mb: 2, backgroundColor: "withe", opacity: "100%", textDecorationColor: "white" }}>
             <EnhancedTableToolbar numSelected={selected.length} />
             <TableContainer>
 

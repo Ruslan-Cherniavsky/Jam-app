@@ -48,12 +48,18 @@ function getTokenLS() {
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [currentJammerCardData, setCurrentJammerCardData] = useState<any>('')
 
   const [localUserId, setlocalUserId] = useState<any>(null);
   const [userNameLocal, setuserNameLocal] = useState<any>(null);
 
   const globalUserName: any = useSelector((state: RootState) => state.currentUserData.userName);
+
   const globalUserId: any = useSelector((state: RootState) => state.currentUserData.userId);
+
+
+
+
 
   const useAppDispatch: () => AppDispatch = useDispatch;
   const dispatch = useAppDispatch();
@@ -76,13 +82,33 @@ function Header() {
       const fetchData = async () => {
         const userData = await dataAxios.userDataFetch();
           dispatch(setUserId(userData._id))
-          dispatch(setUserName(userData.userName))
+          // dispatch(setUserName(userData.userName))
           dispatch(setUserRole(userData.userRole))
+
+
+
+          // User_UPDATE ---- nickname
+          const jammerCardData = await dataAxios.jemerCardDataFetch(userData._id);
+          setCurrentJammerCardData(jammerCardData['user'])
+          // dispatch(resetUserName())
+          // dispatch(setUserName(currentJammerCardData.userName))
+        
       }
       fetchData()
         .catch(console.error);
     }
   }, []);
+
+
+  
+useEffect(() => {
+
+  // console.log(currentJammerCardData.userName)
+
+  dispatch(resetUserName())
+  dispatch(setUserName(currentJammerCardData.userName))
+
+},[currentJammerCardData.userName])
 
 
 

@@ -47,7 +47,6 @@ nav {
 
 
 
-
 /* 
 CARD CSS ======================
 
@@ -71,4 +70,10 @@ CARD CSS ======================
 
 .secTex{
   opacity: 70%;
+}
+
+
+.inputCard{
+
+  /* border:1px */
 }
